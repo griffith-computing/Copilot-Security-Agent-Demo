@@ -2,4 +2,7 @@
   <Folder Name="/src/">
     <Project Path="src/SecureTodoApi/SecureTodoApi.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/SecureTodoApi.SmokeTests/SecureTodoApi.SmokeTests.csproj" />
+  </Folder>
 </Solution>

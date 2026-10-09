@@ -31,6 +31,7 @@ HSTS outside development, and basic response hardening.
 ```bash
 dotnet restore
 dotnet build --no-restore
+dotnet run --project tests/SecureTodoApi.SmokeTests --no-build
 dotnet run --project src/SecureTodoApi
 ```
 
