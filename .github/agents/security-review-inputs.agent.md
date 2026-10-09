@@ -1,6 +1,6 @@
 ---
 description: Review untrusted input and injection risks
-tools: ['search', 'usages', 'problems']
+tools: ['read', 'search']
 ---
 
 # Input and injection reviewer

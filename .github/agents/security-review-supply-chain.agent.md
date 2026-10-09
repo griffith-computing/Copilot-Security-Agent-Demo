@@ -1,6 +1,6 @@
 ---
 description: Review dependencies and security configuration
-tools: ['search', 'usages', 'problems']
+tools: ['read', 'search']
 ---
 
 # Supply-chain and configuration reviewer
