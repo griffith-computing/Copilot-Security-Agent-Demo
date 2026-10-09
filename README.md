@@ -5,8 +5,8 @@ a small ASP.NET Core API that can be used as its review target.
 
 ## Security-review orchestrator
 
-The reusable prompt
-`.github/prompts/security-review.prompt.md` delegates a review to four
+The reusable custom agent
+`.github/agents/security-review.agent.md` delegates a review to four
 independent subagents:
 
 - untrusted input and injection;
@@ -14,13 +14,13 @@ independent subagents:
 - sensitive data and cryptography;
 - dependencies and security configuration.
 
-Each specialist prompt is stored beside the orchestrator. The orchestrator
+Each specialist agent is stored beside the orchestrator. The orchestrator
 requires file-and-line evidence, removes duplicates, and produces a single
 severity-ranked report.
 
-In a Copilot Chat client that supports repository prompt files, run
-`/security-review` from the repository root. Select files first to narrow the
-scope, or run it without a selection to review the repository.
+In a Copilot Chat client that supports repository custom agents, select the
+`security-review` agent. Select files first to narrow the scope, or start
+without a selection to review the repository.
 
 ## Sample .NET application
 

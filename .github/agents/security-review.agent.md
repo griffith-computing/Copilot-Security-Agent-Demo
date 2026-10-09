@@ -1,6 +1,5 @@
 ---
 description: Coordinate a security review with specialized subagents
-agent: agent
 tools: ['search', 'usages', 'problems', 'changes', 'runSubagent']
 ---
 
@@ -15,11 +14,11 @@ pass.
 1. Determine the review scope and identify languages, frameworks, trust
    boundaries, entry points, and sensitive data.
 2. Launch one independent subagent for each role below. Give every subagent the
-   same scope and ask it to read the corresponding role prompt before reviewing:
-   - `.github/prompts/security-review-inputs.prompt.md`
-   - `.github/prompts/security-review-access.prompt.md`
-   - `.github/prompts/security-review-data.prompt.md`
-   - `.github/prompts/security-review-supply-chain.prompt.md`
+   same scope and role defined by the corresponding custom agent:
+   - `.github/agents/security-review-inputs.agent.md`
+   - `.github/agents/security-review-access.agent.md`
+   - `.github/agents/security-review-data.agent.md`
+   - `.github/agents/security-review-supply-chain.agent.md`
 3. Ask subagents to report only findings supported by a concrete attack path and
    exact file and line evidence. They must not edit files.
 4. Reconcile duplicate or conflicting findings. Reject speculative findings that

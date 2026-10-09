@@ -1,6 +1,5 @@
 ---
 description: Review untrusted input and injection risks
-agent: agent
 tools: ['search', 'usages', 'problems']
 ---
 
