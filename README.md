@@ -22,6 +22,19 @@ In a Copilot Chat client that supports repository custom agents, select the
 `security-review` agent. Select files first to narrow the scope, or start
 without a selection to review the repository.
 
+## CodeQL security analysis
+
+The `codeql-security` custom agent coordinates focused reviews of injection,
+access-control, and data-protection query categories through specialist agents
+in `.github/agents`. It returns a consolidated report and only describes a
+CodeQL query as executed when CodeQL results are available in the review
+context.
+
+The `CodeQL security analysis` GitHub Actions workflow runs CodeQL's
+`security-extended` query suite against the C# project for pushes, pull
+requests, and manual dispatches. CodeQL findings are uploaded to GitHub code
+scanning.
+
 ## Sample .NET application
 
 `src/SecureTodoApi` is a minimal .NET 10 API with bounded request and in-memory
