@@ -1,0 +1,71 @@
+name: Build and security review
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  copilot-requests: write
+
+concurrency:
+  group: security-review-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  review:
+    name: Build, test, and review
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        with:
+          persist-credentials: false
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5.4.0
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore CopilotSecurityAgentDemo.slnx
+
+      - name: Build
+        run: dotnet build CopilotSecurityAgentDemo.slnx --configuration Release --no-restore
+
+      - name: Run smoke tests
+        run: dotnet run --project tests/SecureTodoApi.SmokeTests --configuration Release --no-build
+
+      - name: Install GitHub Copilot CLI
+        run: npm install --global @github/copilot@1.0.94
+
+      - name: Run security-review agent
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p artifacts
+          copilot \
+            --agent=security-review \
+            --prompt="Perform a read-only security review of the checked-out revision. Return only the final severity-ranked Markdown report with file-and-line evidence. Do not modify the repository." \
+            --silent \
+            --no-ask-user \
+            --allow-tool=read \
+            --deny-tool=write \
+            --deny-tool=shell \
+            --deny-tool=url \
+            --deny-tool=memory \
+            > artifacts/security-review.md
+          test -s artifacts/security-review.md
+
+      - name: Add report to job summary
+        run: cat artifacts/security-review.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload security review
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: security-review
+          path: artifacts/security-review.md
+          if-no-files-found: error
+          retention-days: 14
