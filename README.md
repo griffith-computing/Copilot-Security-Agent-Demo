@@ -37,3 +37,29 @@ dotnet run --project src/SecureTodoApi
 
 Use `src/SecureTodoApi/SecureTodoApi.http` to exercise the health and todo
 endpoints.
+
+## Automated build and security review
+
+The `Build and security review` GitHub Actions workflow runs for pull requests
+and can also be started manually with **Run workflow** from the Actions tab. It
+restores and builds the .NET 10 solution, runs the smoke tests, and then invokes
+the repository's `security-review` custom agent against the checked-out
+revision.
+
+The agent receives read-only repository access. Its severity-ranked Markdown
+report is added to the job summary and retained as the `security-review`
+artifact for 14 days. The workflow grants only `contents: read` and
+`copilot-requests: write`; it does not grant repository write access or persist
+checkout credentials.
+
+No repository secrets are required. The organization must enable Copilot CLI
+and allow its use in GitHub Actions with the built-in `GITHUB_TOKEN`. Copilot
+requests are billed to the organization.
+
+Run the deterministic validation locally before submitting changes:
+
+```bash
+dotnet restore CopilotSecurityAgentDemo.slnx
+dotnet build CopilotSecurityAgentDemo.slnx --configuration Release --no-restore
+dotnet run --project tests/SecureTodoApi.SmokeTests --configuration Release --no-build
+```
