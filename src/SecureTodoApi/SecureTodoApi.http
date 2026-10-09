@@ -1,0 +1,15 @@
+@SecureTodoApi_HostAddress = https://localhost:7274
+
+GET {{SecureTodoApi_HostAddress}}/health
+Accept: application/json
+
+###
+
+POST {{SecureTodoApi_HostAddress}}/todos
+Content-Type: application/json
+
+{
+  "title": "Review this API"
+}
+
+###
