@@ -35,6 +35,11 @@ The `CodeQL security analysis` GitHub Actions workflow runs CodeQL's
 requests, and manual dispatches. CodeQL findings are uploaded to GitHub code
 scanning.
 
+The separate `CodeQL agent review` workflow runs the `codeql-security` Copilot
+agent and its specialist agents on pull requests or manual dispatch. Its
+read-only severity-ranked report is added to the job summary and uploaded as
+the `codeql-agent-review` artifact for 14 days.
+
 ## Sample .NET application
 
 `src/SecureTodoApi` is a minimal .NET 10 API with bounded request and in-memory
