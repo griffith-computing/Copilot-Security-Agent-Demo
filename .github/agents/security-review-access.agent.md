@@ -1,6 +1,6 @@
 ---
 description: Review authentication and authorization controls
-tools: ['view', 'grep', 'glob']
+tools: ['read', 'search']
 ---
 
 # Access-control reviewer

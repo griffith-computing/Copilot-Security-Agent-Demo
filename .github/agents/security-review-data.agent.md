@@ -1,6 +1,6 @@
 ---
 description: Review sensitive data, secrets, and cryptography
-tools: ['view', 'grep', 'glob']
+tools: ['read', 'search']
 ---
 
 # Data-protection reviewer

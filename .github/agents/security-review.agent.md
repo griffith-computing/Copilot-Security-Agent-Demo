@@ -1,6 +1,6 @@
 ---
 description: Coordinate a security review with specialized subagents
-tools: ['view', 'grep', 'glob', 'task']
+tools: ['read', 'search', 'agent']
 ---
 
 # Security review orchestrator
