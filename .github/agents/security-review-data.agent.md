@@ -1,6 +1,5 @@
 ---
 description: Review sensitive data, secrets, and cryptography
-agent: agent
 tools: ['search', 'usages', 'problems']
 ---
 

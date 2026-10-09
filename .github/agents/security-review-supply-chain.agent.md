@@ -1,6 +1,5 @@
 ---
 description: Review dependencies and security configuration
-agent: agent
 tools: ['search', 'usages', 'problems']
 ---
 

@@ -1,6 +1,5 @@
 ---
 description: Review authentication and authorization controls
-agent: agent
 tools: ['search', 'usages', 'problems']
 ---
 
